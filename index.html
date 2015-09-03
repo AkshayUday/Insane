@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html ng-app="MyBooks">
+
+<head>
+  <link data-require="bootstrap@*" data-semver="3.3.5" rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+</head>
+
+<body ng-controller="booksCtrl" ng-cloak>
+  <div class="bs-docs-example">
+    <ul id="myTab" class="nav nav-tabs">
+      <li class="active"><a href="#home" data-toggle="tab">Tab 1</a></li>
+      <li><a href="#profile" data-toggle="tab">Tab 2</a></li>
+    </ul>
+    <div id="myTabContent" class="tab-content">
+      <div class="tab-pane fade in active" id="home">
+        <br>
+        <h4>Fetching books list</h4>
+        <button class="btn btn-primary" ng-click="getBooks();">Fetch books</button>
+        <br>
+        <br>
+        <div ng-show="flag" class="alert alert-success" role="alert">{{status}}</div>
+        <div ng-show="errflag" class="alert alert-danger" role="alert">{{status}}</div>
+
+      </div>
+      <div class="tab-pane fade" id="profile">
+        <br>
+        <h4>Books Table</h4>
+        <form>
+          <div class="form-group">
+            <div class="input-group">
+              <div class="input-group-addon"><i class="fa fa-search"></i></div>
+              <input type="text" class="form-control" placeholder="Search by Author" ng-model="searchAuthor">
+            </div>
+          </div>
+        </form>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>
+                <a href="#" ng-click="sortType = 'author'; sortReverse = !sortReverse">
+            Author 
+            <span ng-show="sortType == 'author' && !sortReverse" class="fa fa-caret-down"></span>
+            <span ng-show="sortType == 'author' && sortReverse" class="fa fa-caret-up"></span>
+          </a>
+              </th>
+              <th>Book Name</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="book in books.books | orderBy:sortType:sortReverse | filter: searchAuthor">
+              <td>{{book.author}}</td>
+              <td>{{book.name}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <script data-require="jquery@*" data-semver="2.1.4" src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+  <script data-require="bootstrap@*" data-semver="3.3.5" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.5/angular.min.js"></script>
+  <script src="script.js"></script>
+  <script src="app.js"></script>
+  <script src="booksCtrl.js"></script>
+  <script src="booksService.js"></script>
+</body>
+
+</html>
