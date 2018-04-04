@@ -1,0 +1,1 @@
+		                           	  	<td  class="td2 list1"  ng-style = "style"ng-mouseover="style={'background-color':'#B2DAE1' ,'cursor':'pointer'}"ng-mouseleave = 'style ={}' ng-repeat="column in currentColumns"">
